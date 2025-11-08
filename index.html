@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links de Produtos | Bem-vindo(a)</title>
+    <!-- Carrega o Tailwind CSS para estilização rápida e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Define a fonte Inter como padrão e um fundo mais parecido com o Linktree */
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Gradiente de fundo escuro, semelhante ao tema "Onyx" do Linktree */
+            background: linear-gradient(180deg, #1a1a1a 0%, #333333 100%);
+            background-attachment: fixed;
+            color: #f3f4f6; /* Texto claro */
+        }
+        /* Estilo dos botões para se parecerem mais com o Linktree (borda arredondada, sem tanta sombra) */
+        .linktree-button {
+            transition: transform 0.2s ease-in-out, background-color 0.2s;
+            /* Borda sutil para definir o botão */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            /* Fundo sutilmente transparente para os botões */
+            background-color: rgba(255, 255, 255, 0.05); 
+            color: #FFFFFF;
+            /* Usando Tailwind para arredondamento e padding */
+            @apply py-4 px-6 font-bold text-center text-lg rounded-xl;
+        }
+        .linktree-button:hover {
+            /* Efeito de hover sutil */
+            transform: scale(1.01);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="flex flex-col items-center min-h-screen pt-10 pb-10 sm:pt-16 px-4">
+        <!-- Contêiner principal com largura limitada (max-w-lg) para foco em dispositivos móveis -->
+        <div class="w-full max-w-lg">
+
+            <!-- Seção de Perfil (Apenas Texto) -->
+            <header class="text-center mb-8 pt-6">
+                <h1 id="profile-name" class="text-5xl font-extrabold mt-4 text-white">Bem-vindo(a)</h1>
+                <p id="profile-bio" class="text-gray-400 mt-3 text-lg italic">
+                    🚀 Clique abaixo para acessar nossos cursos e ferramentas exclusivas!
+                </p>
+            </header>
+
+            <!-- Seção de Links -->
+            <main id="links-container" class="space-y-4 pt-4">
+                <!-- Os botões de link serão injetados aqui pelo JavaScript -->
+            </main>
+
+            <!-- Rodapé (Assinatura) -->
+            <footer class="mt-16 text-center">
+                <p class="text-xs text-gray-600">
+                    Links por [Sua Marca]
+                </p>
+            </footer>
+
+        </div>
+    </div>
+
+    <script>
+        // Configurações do seu Perfil (apenas texto)
+        const profile = {
+            name: "Bem-vindo(a)",
+            bio: "🚀 Clique abaixo para acessar nossos cursos e ferramentas exclusivas!",
+        };
+
+        // Lista de Links de Produtos Kiwify (URLs e Títulos já fornecidos)
+        const links = [
+            // 1. MÉTODO 48 HORAS (Novo, destaque máximo)
+            { 
+                title: "⏰ Método Primeira Venda em 48 Horas", 
+                url: "https://pay.kiwify.com.br/UQtivkX?afid=RFFhfR47", 
+                color: "text-red-400", // Cor do texto em destaque
+                icon: "🔥" // Emoji
+            },
+            
+            // 2. PVA - PRIMEIRA VENDA AGORA (Ação Imediata)
+            { 
+                title: "🥇 PVA - Primeira Venda Agora (KiWify)", 
+                url: "https://kiwify.app/DhJl61j?afid=eAxGm3dN", 
+                color: "text-yellow-400",
+                icon: "💰"
+            },
+
+            // 3. PRIMEIRA VENDA EM 2 DIAS
+            { 
+                title: "⏱️ Primeira Venda em 2 Dias", 
+                url: "https://kiwify.app/RhyT3pG?afid=2g2egYTj", 
+                color: "text-orange-400", 
+                icon: "⚡"
+            },
+
+            // 4. ACELERADOR DE VENDAS (Produto de escala)
+            { 
+                title: "🚀 ACELERADOR DE VENDAS", 
+                url: "https://pay.kiwify.com.br/Aruu3B8?afid=D35xn7ep", 
+                color: "text-purple-400", 
+                icon: "📈"
+            },
+            
+            // 5. FÁBRICA DE PROMPTS (Ferramenta/Tech)
+            { 
+                title: "🤖 FÁBRICA DE PROMPTS DE IAs (IMAGENS/VÍDEOS) + GUIA", 
+                url: "https://pay.kiwify.com.br/nCGznrR?afid=pWa5pjxm", 
+                color: "text-fuchsia-400", 
+                icon: "✨"
+            },
+        ];
+
+        // Função para renderizar o Linktree
+        function renderLinktree() {
+            // 1. Renderiza o Perfil
+            document.getElementById('profile-name').textContent = profile.name;
+            document.getElementById('profile-bio').textContent = profile.bio;
+
+            const container = document.getElementById('links-container');
+            container.innerHTML = ''; // Limpa o conteúdo anterior
+
+            // 2. Renderiza os Links
+            links.forEach(link => {
+                const linkElement = document.createElement('a');
+                linkElement.href = link.url;
+                linkElement.target = "_blank"; // Abre em nova aba
+                linkElement.rel = "noopener noreferrer"; // Boa prática de segurança
+                
+                // Cria o botão com o estilo, ícone e cor de texto dinâmicos
+                linkElement.innerHTML = `
+                    <div class="linktree-button transform hover:scale-[1.01] active:scale-[0.98]">
+                        <span class="mr-2 ${link.color}">${link.icon || ''}</span>
+                        ${link.title}
+                    </div>
+                `;
+                
+                container.appendChild(linkElement);
+            });
+        }
+
+        // Inicia a renderização quando a página carrega
+        window.onload = renderLinktree;
+    </script>
+</body>
+</html>
